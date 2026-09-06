@@ -28,6 +28,24 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 
 // =========================================
+// GOOGLE SEARCH CONSOLE VERIFICATION
+// =========================================
+
+// IMPORTANT:
+// GOOGLE_VERIFICATION_FILE.html ko Google ke exact
+// verification filename se replace karo.
+
+app.get("/GOOGLE_VERIFICATION_FILE.html", (req, res) => {
+  res.sendFile(
+    path.join(
+      __dirname,
+      "public",
+      "GOOGLE_VERIFICATION_FILE.html"
+    )
+  );
+});
+
+// =========================================
 // HOME PAGE
 // =========================================
 
@@ -246,6 +264,7 @@ app.get("/api/matches/:userId", async (req, res) => {
     }).select("-password");
 
     const matches = otherUsers.map((other) => {
+
       const userSkills = normalizeArray(user.skills);
       const otherSkills = normalizeArray(other.skills);
 
@@ -627,9 +646,9 @@ async function startServer() {
       "MongoDB connected successfully"
     );
 
-    app.listen(PORT, () => {
+    app.listen(PORT, "0.0.0.0", () => {
       console.log(
-        `CampusConnect server running at http://localhost:${PORT}`
+        `CampusConnect server running on port ${PORT}`
       );
     });
 
@@ -637,6 +656,7 @@ async function startServer() {
     console.error(
       "MongoDB connection error:"
     );
+
     console.error(error.message);
 
     process.exit(1);
