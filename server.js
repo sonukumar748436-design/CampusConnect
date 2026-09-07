@@ -31,16 +31,12 @@ app.use(express.static(path.join(__dirname, "public")));
 // GOOGLE SEARCH CONSOLE VERIFICATION
 // =========================================
 
-// IMPORTANT:
-// GOOGLE_VERIFICATION_FILE.html ko Google ke exact
-// verification filename se replace karo.
-
-app.get("/GOOGLE_VERIFICATION_FILE.html", (req, res) => {
+app.get("/googlecfb9f0231aa5cfbf.html", (req, res) => {
   res.sendFile(
     path.join(
       __dirname,
       "public",
-      "GOOGLE_VERIFICATION_FILE.html"
+      "googlecfb9f0231aa5cfbf.html"
     )
   );
 });
@@ -50,7 +46,9 @@ app.get("/GOOGLE_VERIFICATION_FILE.html", (req, res) => {
 // =========================================
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+  res.sendFile(
+    path.join(__dirname, "public", "index.html")
+  );
 });
 
 // =========================================
@@ -264,7 +262,6 @@ app.get("/api/matches/:userId", async (req, res) => {
     }).select("-password");
 
     const matches = otherUsers.map((other) => {
-
       const userSkills = normalizeArray(user.skills);
       const otherSkills = normalizeArray(other.skills);
 
@@ -633,6 +630,7 @@ async function startServer() {
       console.error(
         "ERROR: MONGO_URI is missing in .env file"
       );
+
       process.exit(1);
     }
 
